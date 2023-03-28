@@ -11,6 +11,10 @@ export class BusquedaComponent {
 
   @ViewChild('txtBuscar') txtBuscar!: ElementRef<HTMLInputElement>
 
+  get historial(){
+    return this.gifsService.historial
+
+  }
   constructor(
     private gifsService: GifsService,
     private snackbar: MatSnackBar
@@ -19,6 +23,17 @@ export class BusquedaComponent {
   }
 
   buscar() {
+    const valor = this.txtBuscar.nativeElement.value
+   
+    if (valor.trim().length === 0) {
+      this.snackbar.open('Busqueda vacia', 'Cerrar');
+      return
+    } 
+
+    this.gifsService.buscarGifs(valor)
+    this.txtBuscar.nativeElement.value = ""
+  }
+  buscarGif() {
     const valor = this.txtBuscar.nativeElement.value
    
     if (valor.trim().length === 0) {
