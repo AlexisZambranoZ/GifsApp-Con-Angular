@@ -8,6 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,8 +21,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     GifsModule,
     BrowserModule,
     BrowserAnimationsModule,
-    MatSnackBarModule
-    
+    MatSnackBarModule,
+    HttpClientModule    
   ],
   providers: [],
   bootstrap: [AppComponent]
