@@ -18,17 +18,17 @@ export class GifsService {
     private snackbar: MatSnackBar,
     private http: HttpClient,
   ) {
-    
+
     this._historial = JSON.parse(localStorage.getItem('historial')!) || []
     this.resultados = JSON.parse(localStorage.getItem('resultados')!) || []
 
-     /* if(localStorage.getItem('historial')){
-        this._historial = JSON.parse(localStorage.getItem('historial')!)
-     } */
+    /* if(localStorage.getItem('historial')){
+       this._historial = JSON.parse(localStorage.getItem('historial')!)
+    } */
   }
 
   ngOnInit(): void {
- 
+
     this.resultados[0].images.downsized_medium
   }
 
@@ -45,23 +45,29 @@ export class GifsService {
       this._historial.unshift(query)
       this._historial = this._historial.splice(0, 10)
 
-      localStorage.setItem('historial',JSON.stringify(this.historial))
-    } 
+      localStorage.setItem('historial', JSON.stringify(this.historial))
+    }
 
     const params = new HttpParams().set('api_key', this.apiKey)
-                                   /* .set('limit', '25') */
-                                   .set('q', query)
+      .set('limit', '5')
+      .set('q', query)
 
-   /*  console.log(params.toString); */
+    /*  console.log(params.toString); */
 
-    this.http.get<SearchGifsResponse>(`${this.servicioURL}/search`, {params})
-    .subscribe((res:SearchGifsResponse) => {
-      console.log(res.data);
-      this.resultados = res.data
-      localStorage.setItem('resultados', JSON.stringify(this.resultados))
+    this.http.get<SearchGifsResponse>(`${this.servicioURL}/search`, { params })
+      .subscribe((res: SearchGifsResponse) => {
+        
+        console.log(res.data);
+        this.resultados = res.data
+        localStorage.setItem('resultados', JSON.stringify(this.resultados))
 
-    })
+      })
 
- 
-}
+
+  }
+
+
+  borrarHisotorial() {
+    this._historial = []
+  }
 }

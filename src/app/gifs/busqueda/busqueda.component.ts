@@ -9,9 +9,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class BusquedaComponent {
 
+  history = this.gifsService.historial
+  showHistorial = false
+   
+  resultados: any;
+  totalGifs: number = 0;
+  gifsPorPagina: number = 5;
+
   @ViewChild('txtBuscar') txtBuscar!: ElementRef<HTMLInputElement>
 
-  get historial(){
+  get historial() {
     return this.gifsService.historial
 
   }
@@ -24,25 +31,26 @@ export class BusquedaComponent {
 
   buscar() {
     const valor = this.txtBuscar.nativeElement.value
-   
-    if (valor.trim().length === 0) {
-      this.snackbar.open('Busqueda vacia', 'Cerrar');
-      return
-    } 
 
+    if (valor.trim().length === 0) {
+      return
+    }
+    this.showHistorial = true
+    console.log(this.history);
     this.gifsService.buscarGifs(valor)
     this.txtBuscar.nativeElement.value = ""
   }
-  buscarGif() {
-    const valor = this.txtBuscar.nativeElement.value
-   
-    if (valor.trim().length === 0) {
-      this.snackbar.open('Busqueda vacia', 'Cerrar');
-      return
-    } 
 
-    this.gifsService.buscarGifs(valor)
-    this.txtBuscar.nativeElement.value = ""
+  buscarGif(termino: string) {
+    this.gifsService.buscarGifs(termino)
+
+  }
+
+  borrarElemento() {
+    this.showHistorial = false
+    this.gifsService.borrarHisotorial()
+    localStorage.removeItem('historial');
+
   }
 
 }

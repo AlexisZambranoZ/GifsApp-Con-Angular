@@ -2,6 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { GifsService } from '../services/gifs.service';
 import { HttpClient } from '@angular/common/http';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { Gif } from '../interface/gifs.interfaces';
+
 
 @Component({
   selector: 'app-resultados',
@@ -11,19 +14,16 @@ import { MatPaginator } from '@angular/material/paginator';
 export class ResultadosComponent {
 
 
-
+  
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-
-
-
-  get resultados(){
+  get resultados() {
     return this.gifsService.resultados
   }
 
   constructor(
     private gifsService: GifsService,
-    private http: HttpClient){
+    private http: HttpClient) {
 
   }
 
@@ -32,20 +32,19 @@ export class ResultadosComponent {
     this.http.get(url, { responseType: 'blob' })
       .subscribe((gifBlob: Blob) => {
         const urlGif = URL.createObjectURL(gifBlob);
-  
+
         const link = document.createElement('a');
         link.href = urlGif;
         link.target = '_blank';
         link.download = 'gif.gif';
-  
+
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-  
+
         URL.revokeObjectURL(urlGif);
       });
   }
  
-  
-  
+
 }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { GifsService } from '../../gifs/services/gifs.service';
 
@@ -9,12 +9,16 @@ import { GifsService } from '../../gifs/services/gifs.service';
 })
 export class SidebarComponent {
 
-  history = this.historial
+  showHistory: boolean = false
+  history = this.gifsService.historial
+
+
   @ViewChild('txtBuscar') txtBuscar!: ElementRef<HTMLInputElement>
   constructor(
     private gifsService: GifsService,
     private snackbar: MatSnackBar
-  ) {}
+  ) { }
+
 
 
   get historial() {
@@ -23,28 +27,17 @@ export class SidebarComponent {
   }
 
   borrarElemento() {
-   
+    this.showHistory = false
+    this.gifsService.borrarHisotorial()
     localStorage.removeItem('historial');
 
   }
-
+  //Re-buscar
   buscar(termino: string) {
-    /* console.log(termino); */
+    console.log(this.history);
+    console.log("hola");
     this.gifsService.buscarGifs(termino)
 
   }
-
-  buscargif() {
-    const valor = this.txtBuscar.nativeElement.value
-    
-    if (valor.trim().length === 0) {
-      this.snackbar.open('Busqueda vacia', 'Cerrar');
-      return
-    }
-    console.log(this.history);
-    this.gifsService.buscarGifs(valor)
-    this.txtBuscar.nativeElement.value = ""
-  }
-
 }
 

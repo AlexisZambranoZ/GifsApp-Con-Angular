@@ -1,14 +1,18 @@
-<!-- Menú con historial -->
+<!-- Menú con historial-responsive -->
 <div id="historial-menu">
 
-    <div class="w-full p-3 bg-black border-rigth bg-light d-sm-none">
+    <div *ngIf="showHistorial" class="w-full p-3 bg-black border-rigth bg-light d-sm-none">
         <h5 class="text-center text-gray-100 li text-light">Historial</h5>
 
         <div class="list-group">
-            <a  (click)="buscarGif()" *ngFor="let item of historial"
+            <a (click)="buscarGif(item);" *ngFor="let item of historial"
                 class="mt-2 text-center list-group-item list-group-item-action">
                 {{item | titlecase}}
             </a>
+        </div>
+
+        <div class="text-center">
+            <button type="button" class="mt-2  btn btn-danger" (click)="borrarElemento()">Borrar historial</button>
         </div>
 
     </div>

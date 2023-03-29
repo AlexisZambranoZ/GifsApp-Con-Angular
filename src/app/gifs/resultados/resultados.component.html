@@ -1,10 +1,10 @@
 <div class="row">
     <div *ngFor="let gif of resultados"
         class="col-md-4 col-sm-6 animate__animated animate__fadeIn animate__faster 500ms">
-        <div class="card">
-            <img [src]="gif.images.downsized_medium.url" [alt]="gif.title" class="card-img-top">
-            <div class=" card-body">
-                <p class=" card-text">{{gif.title}}</p>
+        <div class="card p-1 mt-2 bg-secondary-subtle rounded-4">
+            <img [src]="gif.images.downsized_medium.url" [alt]="gif.title" class="card-img-top img-fluid rounded">
+            <div class="card-body">
+                <!-- <p class="card-text">{{gif.title}}</p> -->
                 <div class="text-center">
                     <button class="btn btn-primary" (click)="descargarGif(gif.images.downsized_medium.url)">
                         <mat-icon>cloud_download</mat-icon>
@@ -14,7 +14,6 @@
         </div>
     </div>
     <div class="text-center">
-        <mat-paginator [length]="5" [pageSize]="1"
-            [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+        <mat-paginator [length]="resultados.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
     </div>
 </div>
