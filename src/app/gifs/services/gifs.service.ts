@@ -49,13 +49,14 @@ export class GifsService {
     } 
 
     const params = new HttpParams().set('api_key', this.apiKey)
-                                   .set('limit', '10')
+                                   /* .set('limit', '25') */
                                    .set('q', query)
 
    /*  console.log(params.toString); */
 
     this.http.get<SearchGifsResponse>(`${this.servicioURL}/search`, {params})
     .subscribe((res:SearchGifsResponse) => {
+      console.log(res.data);
       this.resultados = res.data
       localStorage.setItem('resultados', JSON.stringify(this.resultados))
 

@@ -8,35 +8,40 @@ import { GifsService } from '../../gifs/services/gifs.service';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
+
+  history = this.historial
   @ViewChild('txtBuscar') txtBuscar!: ElementRef<HTMLInputElement>
   constructor(
-    private gifsService : GifsService,
+    private gifsService: GifsService,
     private snackbar: MatSnackBar
-  ){}
+  ) {}
 
-  get historial(){
+
+  get historial() {
     return this.gifsService.historial
 
   }
 
   borrarElemento() {
+   
     localStorage.removeItem('historial');
+
   }
 
   buscar(termino: string) {
     /* console.log(termino); */
     this.gifsService.buscarGifs(termino)
-  
+
   }
 
   buscargif() {
     const valor = this.txtBuscar.nativeElement.value
-   
+    
     if (valor.trim().length === 0) {
       this.snackbar.open('Busqueda vacia', 'Cerrar');
       return
-    } 
-
+    }
+    console.log(this.history);
     this.gifsService.buscarGifs(valor)
     this.txtBuscar.nativeElement.value = ""
   }

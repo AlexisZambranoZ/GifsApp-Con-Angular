@@ -1,17 +1,21 @@
-
 <!-- Menú con historial -->
 <div id="historial-menu">
-    <div class="bg-light p-3 d-block d-sm-none">
-        <h5>Historial</h5>
+
+    <div class="w-full p-3 bg-black border-rigth bg-light d-sm-none">
+        <h5 class="text-center text-gray-100 li text-light">Historial</h5>
+
         <div class="list-group">
-            <a (click)="buscarGif()" ngClass="mt-1" *ngFor="let item of historial"
-                class="list-group-item list-group-item-action">
+            <a  (click)="buscarGif()" *ngFor="let item of historial"
+                class="mt-2 text-center list-group-item list-group-item-action">
                 {{item | titlecase}}
             </a>
         </div>
+
     </div>
+
 </div>
 
-<h5>Buscar:</h5>
-
-<input type=" text" class="form-control" placeholder="Buscar gifts...." (keyup.enter)="buscar()" #txtBuscar>
+<div class="p-3 bg-black">
+    <h5 class="text-center text-gray-100 li text-light ">Buscar:</h5>
+    <input type=" text" class="form-control" placeholder="Buscar gifts...." (keyup.enter)="buscar()" #txtBuscar>
+</div>
