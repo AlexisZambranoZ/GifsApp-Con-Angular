@@ -13,8 +13,6 @@ import { Gif } from '../interface/gifs.interfaces';
 })
 export class ResultadosComponent {
 
-
-  
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   get resultados() {
@@ -24,9 +22,7 @@ export class ResultadosComponent {
   constructor(
     private gifsService: GifsService,
     private http: HttpClient) {
-
   }
-
 
   descargarGif(url: string) {
     this.http.get(url, { responseType: 'blob' })
@@ -45,6 +41,4 @@ export class ResultadosComponent {
         URL.revokeObjectURL(urlGif);
       });
   }
- 
-
 }

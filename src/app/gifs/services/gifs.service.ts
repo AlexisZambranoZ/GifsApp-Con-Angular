@@ -21,10 +21,6 @@ export class GifsService {
 
     this._historial = JSON.parse(localStorage.getItem('historial')!) || []
     this.resultados = JSON.parse(localStorage.getItem('resultados')!) || []
-
-    /* if(localStorage.getItem('historial')){
-       this._historial = JSON.parse(localStorage.getItem('historial')!)
-    } */
   }
 
   ngOnInit(): void {
@@ -35,7 +31,6 @@ export class GifsService {
   get historial() {
     return [...this._historial]
   }
-
 
   buscarGifs(query: string) {
 
@@ -49,7 +44,7 @@ export class GifsService {
     }
 
     const params = new HttpParams().set('api_key', this.apiKey)
-      .set('limit', '10')
+      .set('limit', '25')
       .set('q', query)
 
     /*  console.log(params.toString); */
@@ -62,11 +57,7 @@ export class GifsService {
         localStorage.setItem('resultados', JSON.stringify(this.resultados))
 
       })
-
-
   }
-
-
   borrarHisotorial() {
     this._historial = []
   }
