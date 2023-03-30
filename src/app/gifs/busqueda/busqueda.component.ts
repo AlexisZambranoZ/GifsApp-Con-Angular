@@ -11,16 +11,19 @@ export class BusquedaComponent {
 
   history = this.gifsService.historial
   showHistorial = false
-   
-  resultados: any;
-  totalGifs: number = 0;
-  gifsPorPagina: number = 5;
 
   @ViewChild('txtBuscar') txtBuscar!: ElementRef<HTMLInputElement>
 
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.buscarGif('hola')
+    this.borrarElemento()
+  }
+
   get historial() {
     return this.gifsService.historial
-
+    
   }
   constructor(
     private gifsService: GifsService,
