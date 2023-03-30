@@ -11,7 +11,7 @@ export class SidebarComponent {
 
   showHistory: boolean = false
   history = this.gifsService.historial
-
+  showHistoryButton: boolean = false;
 
   @ViewChild('txtBuscar') txtBuscar!: ElementRef<HTMLInputElement>
   constructor(
@@ -19,7 +19,10 @@ export class SidebarComponent {
     private snackbar: MatSnackBar
   ) { }
 
-
+  ngOnInit() {
+    this.showHistoryButton = this.gifsService.historial.length > 0;
+  }
+  
 
   get historial() {
     return this.gifsService.historial
@@ -27,10 +30,9 @@ export class SidebarComponent {
   }
 
   borrarElemento() {
-    this.showHistory = false
-    this.gifsService.borrarHisotorial()
+    this.gifsService.borrarHisotorial();
     localStorage.removeItem('historial');
-
+    this.showHistoryButton = false;
   }
   //Re-buscar
   buscar(termino: string) {
