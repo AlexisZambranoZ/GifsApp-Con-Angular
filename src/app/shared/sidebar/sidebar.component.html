@@ -4,7 +4,7 @@
   <div *ngIf="historial.length > 0" class="list-group list-reset">
     <p class="text-center text-gray-100 text-light">Historial</p>
     <a (click)="buscar(item)" *ngFor="let item of historial"
-      class="mt-1 text-left btn btn-primary btn-lg active list-group-item list-group-item-action ">
+      class="mt-1 text-left btn btn-lg active list-group-item list-group-item-action ">
       {{item | titlecase }} </a>
     <button type="button" class="mt-2 btn btn-danger" (click)="borrarElemento()">Borrar
       historial</button>
